@@ -12,7 +12,8 @@ import FooterComponent from './components/Footer';
 //import HeaderComponent from './components/Header';
 
 import './App.css';
-import AuthenticationService from "./components/AuthenticationService";
+import AuthenticationService from './components/AuthenticationService';
+import AuthenticatedRoute from './components/AuthenticatedRoute';
 
 class App extends Component{
   render() {
@@ -23,9 +24,9 @@ class App extends Component{
                 <Switch>
                     <Route exact path="/" component={LoginComponent}/>
                     <Route exact path="/login" component={LoginComponent}/>
-                    <Route exact path="/welcome/:name" component={WelcomeComponent}/>
-                    <Route exact path="/todos" component={ListTodosComponent}/>
-                    <Route exact path="/logout" component={LogoutComponent}/>
+                    <AuthenticatedRoute exact path="/welcome/:name" component={WelcomeComponent}/>
+                    <AuthenticatedRoute exact path="/todos" component={ListTodosComponent}/>
+                    <AuthenticatedRoute Route exact path="/logout" component={LogoutComponent}/>
                     <Route component={ErrorComponent}/>
                 </Switch>
                 <FooterComponent/>
