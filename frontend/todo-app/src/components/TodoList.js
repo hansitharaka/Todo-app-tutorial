@@ -32,7 +32,7 @@ export default class ListTodosComponent extends Component {
                         {
                             this.state.todos.map (
                                 todo =>
-                                    <tr>
+                                    <tr key={todo.id}>
                                         <td>{todo.description}</td>
                                         <td>{todo.done.toString()}</td>
                                         <td>{todo.targetDate.toString()}</td>
