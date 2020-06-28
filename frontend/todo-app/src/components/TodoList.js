@@ -9,12 +9,24 @@ export default class ListTodosComponent extends Component {
         //when u calling an API better not to do the initial API call directly in the constructor
         //because the state wouldn't be initialized until the API call is completed
         //so we initialize it to be empty
-        this.state = {todos : []}
+        this.state = {
+            todos : [],
+            message: null
+        }
+
+        this.deleteTodoClicked = this. deleteTodoClicked.bind(this);
+        //this.refreshTodos = this.refreshTodos(this);
     }
 
     //this method get called when the component loaded for the first time
     //and shown on the browser
     componentDidMount() {
+        this.refreshTodos();
+        console.log(this.state);
+    }
+
+    //method to refresh page
+    refreshTodos() {
         //get the current logged in user's name
         let username = AuthenticationService.getLoggedInUserName();
 
@@ -27,12 +39,27 @@ export default class ListTodosComponent extends Component {
             )
     }
 
+    //delete method
+    deleteTodoClicked(id) {
+        let username = AuthenticationService.getLoggedInUserName();
+        //console.log(id, username);
+        TodoDataService.deleteTodo(username,id)
+            .then(
+                response => {
+                    this.setState({message: `Item ${id} has been deleted successfully`});
+                    this.refreshTodos();
+                }
+            )
+    }
+
+
     render() {
         return(
             <div className="container-fluid mx-auto px-5 py-5">
                 <div className="row pb-4">
                     <h1 >My Todo List</h1>
                 </div>
+                {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
                 <div className="row">
                     <table className="table table-striped w-100">
                         <thead>
@@ -40,6 +67,9 @@ export default class ListTodosComponent extends Component {
                                 <th className="text-left">Description</th>
                                 <th className="text-left">Target Date</th>
                                 <th className="text-left">is Completed?</th>
+                                <th className="text-left">Update</th>
+                                <th className="text-left">Delete</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -50,7 +80,9 @@ export default class ListTodosComponent extends Component {
                                         <td className="text-left">{todo.description}</td>
                                         <td className="text-left">{todo.targetDate.toString()}</td>
                                         <td className="text-left">{todo.done.toString()}</td>
-
+                                        <td><button className="btn btn-warning">Update</button></td>
+                                        <td><button className="btn btn-danger"
+                                                    onClick={() => this.deleteTodoClicked(todo.id)}>Delete</button></td>
                                     </tr>
                             )
                         }
