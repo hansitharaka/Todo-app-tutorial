@@ -1,19 +1,31 @@
 import React, {Component} from 'react';
+import TodoDataService from '../api/todo/TodoDataService';
+import AuthenticationService from './AuthenticationService';
 
 export default class ListTodosComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            todos :
-             [
-                {id: 1, description: 'Learn React', done: false, targetDate: new Date()},
-                {id: 2, description: 'Finish Homework', done: false, targetDate: new Date()},
-                {id: 3, description: 'House chores', done: false, targetDate: new Date()}
-             ]
-        }
+        //when u calling an API better not to do the initial API call directly in the constructor
+        //because the state wouldn't be initialized until the API call is completed
+        //so we initialize it to be empty
+        this.state = {todos : []}
     }
 
+    //this method get called when the component loaded for the first time
+    //and shown on the browser
+    componentDidMount() {
+        //get the current logged in user's name
+        let username = AuthenticationService.getLoggedInUserName();
+
+        TodoDataService.retrieveAllTodos(username)
+            .then(   //if it is successful
+                response => {
+                    //console.log(response)
+                    this.setState({todos : response.data})
+                }
+            )
+    }
 
     render() {
         return(
