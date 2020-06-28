@@ -39,7 +39,11 @@ export default class WelcomeComponent extends Component {
         //     //what will you do when u get a response
         //     .then(response => this.handleSuccessfulResponse(response));
 
-        HelloWorldService.executeHelloWorldBeanService()
+        // HelloWorldService.executeHelloWorldBeanService()
+        //     //what will you do when u get a response
+        //     .then(response => this.handleSuccessfulResponse(response));
+
+        HelloWorldService.executeHelloWorldPathVariableService(this.props.match.params.name)
             //what will you do when u get a response
             .then(response => this.handleSuccessfulResponse(response));
     }
