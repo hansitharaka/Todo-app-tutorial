@@ -1,0 +1,53 @@
+package com.in28minutes.rest.webservices.restfulwebservices.todo;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class TodoHardcodedService {
+	
+	//this would act as our database
+	private static List<Todo> todos = new ArrayList<>(); 
+	
+	private static int idCounter = 0;
+	
+	
+	//initializing data
+	static {
+		todos.add(new Todo(++idCounter, "in28mintues", "Learn to dance", new Date(), false));
+		todos.add(new Todo(++idCounter, "in28mintues", "Learn about Angular", new Date(), false));
+		todos.add(new Todo(++idCounter, "in28mintues", "Learn English", new Date(), false));
+	}
+	
+	//retrieve all todos
+	public List<Todo> findAll() {
+		return todos;
+	}
+
+	//find user by Id
+	public Todo findById(long id) {		
+		for(Todo todo:todos) {
+			if(todo.getId() == id) {
+				return todo;
+			}
+		}
+		return null;
+	}
+
+	//find user and delete
+	public Todo deleteById(long id) {
+		Todo todo = findById(id);
+		
+		if(todo == null) return null;
+		
+		
+		if(todos.remove(todo)) {			
+			return todo;
+		}
+		return null;
+	}
+
+}
