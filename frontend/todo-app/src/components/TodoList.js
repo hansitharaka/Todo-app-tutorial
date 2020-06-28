@@ -29,15 +29,17 @@ export default class ListTodosComponent extends Component {
 
     render() {
         return(
-            <div>
-                <h1>My Todo List</h1>
-                <div className="container">
-                    <table className='table'>
+            <div className="container-fluid mx-auto px-5 py-5">
+                <div className="row pb-4">
+                    <h1 >My Todo List</h1>
+                </div>
+                <div className="row">
+                    <table className="table table-striped w-100">
                         <thead>
                             <tr>
-                                <th>Description</th>
-                                <th>Completed</th>
-                                <th>Target Date</th>
+                                <th className="text-left">Description</th>
+                                <th className="text-left">Target Date</th>
+                                <th className="text-left">is Completed?</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,9 +47,10 @@ export default class ListTodosComponent extends Component {
                             this.state.todos.map (
                                 todo =>
                                     <tr key={todo.id}>
-                                        <td>{todo.description}</td>
-                                        <td>{todo.done.toString()}</td>
-                                        <td>{todo.targetDate.toString()}</td>
+                                        <td className="text-left">{todo.description}</td>
+                                        <td className="text-left">{todo.targetDate.toString()}</td>
+                                        <td className="text-left">{todo.done.toString()}</td>
+
                                     </tr>
                             )
                         }
