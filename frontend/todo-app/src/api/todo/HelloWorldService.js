@@ -6,6 +6,12 @@ class HelloWorldService {
         return axios.get('http://localhost:8080/hello-world')
 
     }
+
+    executeHelloWorldBeanService() {
+        //console.log('executed service');
+        return axios.get('http://localhost:8080/hello-world-bean')
+
+    }
 }
 
 export default new HelloWorldService()
