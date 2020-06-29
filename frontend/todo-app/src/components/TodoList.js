@@ -17,6 +17,7 @@ export default class ListTodosComponent extends Component {
 
         this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
         this.updateTodoClicked = this.updateTodoClicked.bind(this);
+        this.addTodoClicked = this.addTodoClicked.bind(this);
         //this.refreshTodos = this.refreshTodos(this);
     }
 
@@ -70,6 +71,12 @@ export default class ListTodosComponent extends Component {
         //     )
     }
 
+    //add method
+    addTodoClicked() {
+        this.props.history.push(`/todos/-1`)
+    }
+
+
     render() {
         return(
             <div className="container-fluid mx-auto px-5 py-5">
@@ -107,7 +114,9 @@ export default class ListTodosComponent extends Component {
                         </tbody>
                     </table>
 
-
+                    <div className="row pl-3">
+                        <button className="btn btn-success" onClick={this.addTodoClicked}>Add</button>
+                    </div>
 
                 </div>
             </div>
