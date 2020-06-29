@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import moment from 'moment';
 import TodoDataService from '../api/todo/TodoDataService';
 import AuthenticationService from './AuthenticationService';
 
@@ -94,7 +95,7 @@ export default class ListTodosComponent extends Component {
                                 todo =>
                                     <tr key={todo.id}>
                                         <td className="text-left">{todo.description}</td>
-                                        <td className="text-left">{todo.targetDate.toString()}</td>
+                                        <td className="text-left">{moment(todo.targetDate).format('YYYY-MM-DD')}</td>
                                         <td className="text-left">{todo.done.toString()}</td>
                                         <td><button className="btn btn-success"
                                                     onClick={() => this.updateTodoClicked(todo.id)}>Update</button></td>
@@ -105,6 +106,9 @@ export default class ListTodosComponent extends Component {
                         }
                         </tbody>
                     </table>
+
+
+
                 </div>
             </div>
         )

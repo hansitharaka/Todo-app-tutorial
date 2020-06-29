@@ -28,7 +28,14 @@ export default class TodoComponent extends Component {
     }
 
     onSubmit(values) {
-        console.log(values)
+        let username = AuthenticationService.getLoggedInUserName();
+
+        TodoDataService.updateTodo(username, this.state.id, {
+            id: this.state.id,
+            description: values.description,
+            targetDate: values.targetDate
+        }).then( () => { this.props.history.push('/todos') } )
+        //console.log(values)
     }
 
     validate(values) {
