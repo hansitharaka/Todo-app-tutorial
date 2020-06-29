@@ -26,6 +26,23 @@ public class TodoHardcodedService {
 	public List<Todo> findAll() {
 		return todos;
 	}
+	
+	//insert & update data
+	public Todo save(Todo todo) {
+		if(todo.getId() == -1 || todo.getId() == 0) {
+			//if true, do an insert - add this item to the list 
+			todo.setId(++idCounter);
+			todos.add(todo);
+			
+		} else {
+			//if false, do an update - delete the current item and add the new item
+			deleteById(todo.getId());
+			todos.add(todo);			
+		}
+		return todo;
+	}
+	
+	
 
 	//find user by Id
 	public Todo findById(long id) {		

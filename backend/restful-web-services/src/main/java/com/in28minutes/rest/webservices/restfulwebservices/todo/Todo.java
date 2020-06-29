@@ -9,6 +9,9 @@ public class Todo {
 	private Date targetDate;
 	private boolean isDone;
 
+	
+	protected Todo() {}
+	
 	public Todo(long id, String username, String description, Date targetDate, boolean isDone) {
 		super();
 		this.id = id;
