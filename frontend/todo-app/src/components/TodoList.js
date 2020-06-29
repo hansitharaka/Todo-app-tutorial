@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TodoDataService from '../api/todo/TodoDataService';
 import AuthenticationService from './AuthenticationService';
+import TodoComponent from './TodoComponent';
 
 export default class ListTodosComponent extends Component {
     constructor(props) {
@@ -14,7 +15,8 @@ export default class ListTodosComponent extends Component {
             message: null
         }
 
-        this.deleteTodoClicked = this. deleteTodoClicked.bind(this);
+        this.deleteTodoClicked = this.deleteTodoClicked.bind(this);
+        this.updateTodoClicked = this.updateTodoClicked.bind(this);
         //this.refreshTodos = this.refreshTodos(this);
     }
 
@@ -52,6 +54,21 @@ export default class ListTodosComponent extends Component {
             )
     }
 
+    //update method
+    updateTodoClicked(id) {
+        console.log('update'+id)
+        this.props.history.push(`/todos/${id}`)
+        ///todos/${id}
+        // let username = AuthenticationService.getLoggedInUserName();
+        // //console.log(id, username);
+        // TodoDataService.deleteTodo(username,id)
+        //     .then(
+        //         response => {
+        //             this.setState({message: `Item ${id} has been deleted successfully`});
+        //             this.refreshTodos();
+        //         }
+        //     )
+    }
 
     render() {
         return(
@@ -67,8 +84,8 @@ export default class ListTodosComponent extends Component {
                                 <th className="text-left">Description</th>
                                 <th className="text-left">Target Date</th>
                                 <th className="text-left">is Completed?</th>
-                                <th className="text-left">Update</th>
-                                <th className="text-left">Delete</th>
+                                <th className="text-center">Update</th>
+                                <th className="text-center">Delete</th>
 
                             </tr>
                         </thead>
@@ -80,7 +97,8 @@ export default class ListTodosComponent extends Component {
                                         <td className="text-left">{todo.description}</td>
                                         <td className="text-left">{todo.targetDate.toString()}</td>
                                         <td className="text-left">{todo.done.toString()}</td>
-                                        <td><button className="btn btn-warning">Update</button></td>
+                                        <td><button className="btn btn-success"
+                                                    onClick={() => this.updateTodoClicked(todo.id)}>Update</button></td>
                                         <td><button className="btn btn-danger"
                                                     onClick={() => this.deleteTodoClicked(todo.id)}>Delete</button></td>
                                     </tr>

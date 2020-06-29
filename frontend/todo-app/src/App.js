@@ -10,6 +10,7 @@ import HeaderComponent from './components/Header';
 import ErrorComponent from './components/ErrorComponent';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import LogoutComponent from './components/Logout';
+import TodoComponent from './components/TodoComponent';
 
 import './App.css';
 
@@ -25,6 +26,7 @@ class App extends Component{
                     <AuthenticatedRoute exact path="/welcome/:name" component={WelcomeComponent}/>
                     <AuthenticatedRoute exact path="/todos" component={ListTodosComponent}/>
                     <AuthenticatedRoute Route exact path="/logout" component={LogoutComponent}/>
+                    <AuthenticatedRoute Route exact path="/todos/:id" component={TodoComponent}/>
                     <Route component={ErrorComponent}/>
                 </Switch>
                 <FooterComponent/>
