@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import TodoDataService from '../api/todo/TodoDataService';
 import AuthenticationService from './AuthenticationService';
-import TodoComponent from './TodoComponent';
 
 export default class ListTodosComponent extends Component {
     constructor(props) {
