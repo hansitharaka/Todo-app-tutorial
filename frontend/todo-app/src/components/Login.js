@@ -48,7 +48,7 @@ export default class LoginComponent extends Component {
             .then( (response) => {
                 AuthenticationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token);
                 this.props.history.push(`/welcome/${this.state.username}`)
-            }) .catch( () => {
+            }).catch(() => {
             this.setState({showSuccessMsg: false, hasLoginFailed: true})
         })
 

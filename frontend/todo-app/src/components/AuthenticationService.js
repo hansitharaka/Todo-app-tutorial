@@ -49,10 +49,8 @@ class AuthenticationService {
     isUserLoggedIn() {
         let user = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
 
-        if(user === null)
-            return false
-        else
-            return true
+        if(user === null) return false
+        return true
     }
 
     getLoggedInUserName() {
@@ -64,7 +62,7 @@ class AuthenticationService {
 
     setupAxiosInterceptors(token) {
         axios.interceptors.request.use(
-            (config) =>{
+            (config) => {
                 if(this.isUserLoggedIn()) {
                     config.headers.authorization = token
                 }
