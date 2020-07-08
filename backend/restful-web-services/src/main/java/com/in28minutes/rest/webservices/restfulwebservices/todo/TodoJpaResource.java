@@ -36,29 +36,29 @@ public class TodoJpaResource {
 	//delete an item
 	@DeleteMapping("/jpa/users/{username}/todos/{id}")
 	public ResponseEntity<Void> deleteTodo(@PathVariable String username, @PathVariable long id) {
-		Todo todo = todoService.deleteById(id);
+		todoJpaRepository.deleteById(id);
 		
-		if(todo != null) {
-			return ResponseEntity.noContent().build(); // returns no content if its a success
-		}
-		
-		return ResponseEntity.notFound().build(); //if failed it will return not found(404)
+		return ResponseEntity.noContent().build(); // returns no content if its a success		
 	}
 	
 	//update an item
 	@PutMapping("/jap/users/{username}/todos/{id}")
-	public ResponseEntity<Todo> updateTodos(@PathVariable String username, 
+	public ResponseEntity<Todo> updateTodo(@PathVariable String username, 
 			@PathVariable long id, @RequestBody Todo todo) {
 		
-		Todo todoUpdated = todoService.save(todo);
+		todo.setUsername(username);
+		
+		Todo todoUpdated = todoJpaRepository.save(todo);
 		return new ResponseEntity<Todo>(todo, HttpStatus.OK);
 	}
 	
 	//insert an item
 	@PostMapping("/jpa/users/{username}/todos")
-	public ResponseEntity<Void> updateTodos(@PathVariable String username, @RequestBody Todo todo) {
+	public ResponseEntity<Void> createTodo(@PathVariable String username, @RequestBody Todo todo) {
 		
-		Todo createdTodo = todoService.save(todo);
+		todo.setUsername(username);
+		
+		Todo createdTodo = todoJpaRepository.save(todo);
 		
 		//we need to return the location(url) of the created resource
 		//Get current resource url
