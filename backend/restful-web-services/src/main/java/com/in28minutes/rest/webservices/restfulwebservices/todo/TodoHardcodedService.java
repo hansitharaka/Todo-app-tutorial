@@ -12,7 +12,7 @@ public class TodoHardcodedService {
 	//this would act as our database
 	private static List<Todo> todos = new ArrayList<>(); 
 	
-	private static int idCounter = 0;
+	private static long idCounter = 0;
 	
 	
 	//initializing data
