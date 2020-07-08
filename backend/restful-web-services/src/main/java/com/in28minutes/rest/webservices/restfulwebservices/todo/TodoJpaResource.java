@@ -9,8 +9,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-@RestController
 @CrossOrigin(origins="http://localhost:4200")
+@RestController
 public class TodoJpaResource {
 	
 	@Autowired
@@ -42,7 +42,7 @@ public class TodoJpaResource {
 	}
 	
 	//update an item
-	@PutMapping("/jap/users/{username}/todos/{id}")
+	@PutMapping("/jpa/users/{username}/todos/{id}")
 	public ResponseEntity<Todo> updateTodo(@PathVariable String username, 
 			@PathVariable long id, @RequestBody Todo todo) {
 		
